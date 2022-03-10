@@ -1,0 +1,181 @@
+----Input code----
+
+if y:
+	if x:
+		f(x,-y)
+	elif 0:
+		x=1
+	elif 1 < 5:
+		'hi'
+	else:
+		'why'
+else:
+	print('done')
+
+y = x
+x=y
+
+
+ ----- 
+ Syntax Tree
+ ----- 
+
+
+(STATEMENTS)
+| 
+|->(if)
+| | 
+| |->(CONDITION)
+| | | 
+| | |->(y)
+| | 
+| |->(BODY)
+| | | 
+| | |->(if)
+| | | | 
+| | | |->(CONDITION)
+| | | | | 
+| | | | |->(x)
+| | | | 
+| | | |->(BODY)
+| | | | | 
+| | | | |->(FUNC_CALL)
+| | | | | | 
+| | | | | |->(f)
+| | | | | | 
+| | | | | |->(ARGUMENTS)
+| | | | | | | 
+| | | | | | |->(x)
+| | | | | | | 
+| | | | | | |->(-)
+| | | | | | | | 
+| | | | | | | |->(0)
+| | | | | | | | 
+| | | | | | | |->(y)
+| | | | 
+| | | |->(elif)
+| | | | | 
+| | | | |->(CONDITION)
+| | | | | | 
+| | | | | |->(0)
+| | | | | 
+| | | | |->(BODY)
+| | | | | | 
+| | | | | |->(ASSIGNMENT)
+| | | | | | | 
+| | | | | | |->(x)
+| | | | | | | 
+| | | | | | |->(1)
+| | | | | 
+| | | | |->(elif)
+| | | | | | 
+| | | | | |->(CONDITION)
+| | | | | | | 
+| | | | | | |->(<)
+| | | | | | | | 
+| | | | | | | |->(1)
+| | | | | | | | 
+| | | | | | | |->(5)
+| | | | | | 
+| | | | | |->(BODY)
+| | | | | | | 
+| | | | | | |->("hi")
+| | | | | | 
+| | | | | |->(else)
+| | | | | | | 
+| | | | | | |->(BODY)
+| | | | | | | | 
+| | | | | | | |->("why")
+| | 
+| |->(else)
+| | | 
+| | |->(BODY)
+| | | | 
+| | | |->(FUNC_CALL)
+| | | | | 
+| | | | |->(print)
+| | | | | 
+| | | | |->(ARGUMENTS)
+| | | | | | 
+| | | | | |->("done")
+| 
+|->(ASSIGNMENT)
+| | 
+| |->(y)
+| | 
+| |->(x)
+| 
+|->(ASSIGNMENT)
+| | 
+| |->(x)
+| | 
+| |->(y)
+
+
+
+ ------
+ IR Code Generated (Three Address Code):
+ ------
+
+tmp0 = y  
+tmp1 = not tmp0
+
+define label10:
+	tmp2 = x  
+	tmp3 = not tmp2
+	
+define label8:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	
+define label9:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	if tmp3 goto label8
+	goto label9
+
+
+define label11:
+	tmp2 = x  
+	tmp3 = not tmp2
+	
+define label8:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	
+define label9:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	if tmp3 goto label8
+	goto label9
+
+if tmp1 goto label10
+goto label11
+tmp12 = x  
+y = tmp12  
+tmp13 = y  
+x = tmp13  

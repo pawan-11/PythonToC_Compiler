@@ -1,0 +1,309 @@
+----Input code----
+
+if y:
+	if x:
+		f(x,-y)
+	elif 0:
+		x=1
+	elif 1 < 5:
+		'hi'
+	else:
+		'why'
+else:
+	print('done')
+
+y = x
+x=y
+
+def func(x,y,z):
+	print('hello')
+print('the end')
+while x < y:
+	x = x + 1
+print("loop ended")
+
+a = ((-b) + c) * d
+
+
+
+ ----- 
+ Syntax Tree
+ ----- 
+
+
+(STATEMENTS)
+| 
+|->(if)
+| | 
+| |->(CONDITION)
+| | | 
+| | |->(y)
+| | 
+| |->(BODY)
+| | | 
+| | |->(if)
+| | | | 
+| | | |->(CONDITION)
+| | | | | 
+| | | | |->(x)
+| | | | 
+| | | |->(BODY)
+| | | | | 
+| | | | |->(FUNC_CALL)
+| | | | | | 
+| | | | | |->(f)
+| | | | | | 
+| | | | | |->(ARGUMENTS)
+| | | | | | | 
+| | | | | | |->(x)
+| | | | | | | 
+| | | | | | |->(-)
+| | | | | | | | 
+| | | | | | | |->(0)
+| | | | | | | | 
+| | | | | | | |->(y)
+| | | | 
+| | | |->(elif)
+| | | | | 
+| | | | |->(CONDITION)
+| | | | | | 
+| | | | | |->(0)
+| | | | | 
+| | | | |->(BODY)
+| | | | | | 
+| | | | | |->(ASSIGNMENT)
+| | | | | | | 
+| | | | | | |->(x)
+| | | | | | | 
+| | | | | | |->(1)
+| | | | | 
+| | | | |->(elif)
+| | | | | | 
+| | | | | |->(CONDITION)
+| | | | | | | 
+| | | | | | |->(<)
+| | | | | | | | 
+| | | | | | | |->(1)
+| | | | | | | | 
+| | | | | | | |->(5)
+| | | | | | 
+| | | | | |->(BODY)
+| | | | | | | 
+| | | | | | |->("hi")
+| | | | | | 
+| | | | | |->(else)
+| | | | | | | 
+| | | | | | |->(BODY)
+| | | | | | | | 
+| | | | | | | |->("why")
+| | 
+| |->(else)
+| | | 
+| | |->(BODY)
+| | | | 
+| | | |->(FUNC_CALL)
+| | | | | 
+| | | | |->(print)
+| | | | | 
+| | | | |->(ARGUMENTS)
+| | | | | | 
+| | | | | |->("done")
+| 
+|->(ASSIGNMENT)
+| | 
+| |->(y)
+| | 
+| |->(x)
+| 
+|->(ASSIGNMENT)
+| | 
+| |->(x)
+| | 
+| |->(y)
+| 
+|->(FUNCTION)
+| | 
+| |->(func)
+| | 
+| |->(PARAMETERS)
+| | | 
+| | |->(x)
+| | | 
+| | |->(y)
+| | | 
+| | |->(z)
+| | 
+| |->(BODY)
+| | | 
+| | |->(FUNC_CALL)
+| | | | 
+| | | |->(print)
+| | | | 
+| | | |->(ARGUMENTS)
+| | | | | 
+| | | | |->("hello")
+| 
+|->(FUNC_CALL)
+| | 
+| |->(print)
+| | 
+| |->(ARGUMENTS)
+| | | 
+| | |->("the end")
+| 
+|->(while)
+| | 
+| |->(CONDITION)
+| | | 
+| | |->(<)
+| | | | 
+| | | |->(x)
+| | | | 
+| | | |->(y)
+| | 
+| |->(BODY)
+| | | 
+| | |->(ASSIGNMENT)
+| | | | 
+| | | |->(x)
+| | | | 
+| | | |->(+)
+| | | | | 
+| | | | |->(x)
+| | | | | 
+| | | | |->(1)
+| | 
+| |->(else)
+| 
+|->(FUNC_CALL)
+| | 
+| |->(print)
+| | 
+| |->(ARGUMENTS)
+| | | 
+| | |->("loop ended")
+| 
+|->(ASSIGNMENT)
+| | 
+| |->(a)
+| | 
+| |->(*)
+| | | 
+| | |->(+)
+| | | | 
+| | | |->(-)
+| | | | | 
+| | | | |->(0)
+| | | | | 
+| | | | |->(b)
+| | | | 
+| | | |->(c)
+| | | 
+| | |->(d)
+
+
+
+ ------
+ IR Code Generated (Three Address Code):
+ ------
+
+tmp0 = y  
+tmp1 = not tmp0
+
+define label10:
+	tmp2 = x  
+	tmp3 = not tmp2
+	
+define label8:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	
+define label9:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	if tmp3 goto label8
+	goto label9
+
+
+define label11:
+	tmp2 = x  
+	tmp3 = not tmp2
+	
+define label8:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	
+define label9:
+	tmp4 = x  
+	arg tmp4
+	tmp5 = 0  
+	tmp6 = y  
+	tmp7 = tmp5 - tmp6
+	arg tmp7
+	goto f
+
+	if tmp3 goto label8
+	goto label9
+
+if tmp1 goto label10
+goto label11
+tmp12 = x  
+y = tmp12  
+tmp13 = y  
+x = tmp13  
+
+define label_func:
+	param x
+	param y
+	param z
+	tmp14 = "hello"  
+	arg tmp14
+	goto print
+
+
+tmp15 = "the end"  
+arg tmp15
+goto print
+tmp16 = x  
+tmp17 = y  
+tmp18 = tmp16 < tmp17
+tmp19 = not tmp18
+
+define label23:
+	if tmp19 goto break
+	tmp20 = x  
+	tmp21 = 1  
+	tmp22 = tmp20 + tmp21
+	x = tmp22  
+	goto label23
+
+goto label23
+tmp24 = "loop ended"  
+arg tmp24
+goto print
+tmp25 = 0  
+tmp26 = b  
+tmp27 = tmp25 - tmp26
+tmp28 = c  
+tmp29 = tmp27 + tmp28
+tmp30 = d  
+tmp31 = tmp29 * tmp30
+a = tmp31  

@@ -13,3 +13,5 @@
 
 #basic subset of code includes
 #while loops, if elif else statements, function definitions, calls, assignment statements, expressions, data types are string, number.
+
+#script is provided, which runs the executable jar file created from TacConverter.java, running the example inputs in exampleInputs and placing the outputs in exampleOutputs/ folder. 

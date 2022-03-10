@@ -1,0 +1,63 @@
+----Input code----
+
+def func(x,y,z):
+	print('hello')
+print('the end')
+
+
+ ----- 
+ Syntax Tree
+ ----- 
+
+
+(STATEMENTS)
+| 
+|->(FUNCTION)
+| | 
+| |->(func)
+| | 
+| |->(PARAMETERS)
+| | | 
+| | |->(x)
+| | | 
+| | |->(y)
+| | | 
+| | |->(z)
+| | 
+| |->(BODY)
+| | | 
+| | |->(FUNC_CALL)
+| | | | 
+| | | |->(print)
+| | | | 
+| | | |->(ARGUMENTS)
+| | | | | 
+| | | | |->("hello")
+| 
+|->(FUNC_CALL)
+| | 
+| |->(print)
+| | 
+| |->(ARGUMENTS)
+| | | 
+| | |->("the end")
+
+
+
+ ------
+ IR Code Generated (Three Address Code):
+ ------
+
+
+define label_func:
+	param x
+	param y
+	param z
+	tmp0 = "hello"  
+	arg tmp0
+	goto print
+
+
+tmp1 = "the end"  
+arg tmp1
+goto print
